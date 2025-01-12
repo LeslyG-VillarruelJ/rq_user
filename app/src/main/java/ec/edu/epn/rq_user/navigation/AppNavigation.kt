@@ -1,6 +1,8 @@
 package ec.edu.epn.rq_user.navigation
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -14,27 +16,42 @@ import ec.edu.epn.rq_user.uin.ExploraScreen
 import ec.edu.epn.rq_user.uin.CreaRutaScreen
 import ec.edu.epn.rq_user.uin.FavoritasScreen
 import ec.edu.epn.rq_user.uin.PerfilScreen
+import ec.edu.epn.rq_user.uin.profile.UserEmailScreen
+import ec.edu.epn.rq_user.uin.profile.UserHouseScreen
+import ec.edu.epn.rq_user.uin.profile.UserInfoScreen
+import ec.edu.epn.rq_user.uin.profile.UserNameScreen
+import ec.edu.epn.rq_user.uin.profile.UserPhoneScreen
+import ec.edu.epn.rq_user.uin.profile.UserSettingsScreen
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AppNavigation(navController: NavHostController, modifier: Modifier = Modifier) {
-    Scaffold(
-        bottomBar = { NavBar(navController) }  // ✅ Se asegura que el NavBar esté presente
-    ) { innerPadding ->
-        NavHost(
-            navController = navController,
-            startDestination = "explora",
-            modifier = Modifier
-                .fillMaxSize()  // ✅ Asegurar que el NavHost use el espacio correctamente
-                .padding(innerPadding)  // ✅ Evita que el contenido se superponga con el NavBar
-        ) {
-            // Pantallas de la barra de navegación
-            composable("explora") { ExploraScreen(navController) }
-            composable("crearuta") { CreaRutaScreen(navController) }
-            composable("favoritas") { FavoritasScreen(navController) }
-            composable("perfil") { PerfilScreen(navController) }
+  Scaffold(
+    bottomBar = { NavBar(navController) }  // ✅ Se asegura que el NavBar esté presente
+  ) { innerPadding ->
+    NavHost(
+      navController = navController,
+      startDestination = "explora",
+      modifier = Modifier
+        .fillMaxSize()  // ✅ Asegurar que el NavHost use el espacio correctamente
+        .padding(innerPadding)  // ✅ Evita que el contenido se superponga con el NavBar
+    ) {
+      // Pantallas de la barra de navegación
+      composable("explora") { ExploraScreen(navController) }
+      composable("crearuta") { CreaRutaScreen(navController) }
+      composable("favoritas") { FavoritasScreen(navController) }
+      composable("perfil") { PerfilScreen(navController) }
 
-            // añadir pantallas adicionales
+      // añadir pantallas adicionales
+      // PROFILE SCREENS
+      composable("configuracion") { UserSettingsScreen(navController)}
+      composable("informacion") { UserInfoScreen(navController) }
+      composable("updateNombre") { UserNameScreen(navController) }
+      composable("updateTelefono") { UserPhoneScreen(navController) }
+      composable("updateEmail") { UserEmailScreen(navController) }
+      composable("updateHouse") { UserHouseScreen(navController) }
 
-        }
+
     }
+  }
 }
