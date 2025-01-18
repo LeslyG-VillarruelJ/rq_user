@@ -15,7 +15,10 @@ import ec.edu.epn.rq_user.NavBar
 import ec.edu.epn.rq_user.uin.ExploraScreen
 import ec.edu.epn.rq_user.uin.CreaRutaScreen
 import ec.edu.epn.rq_user.uin.FavoritasScreen
+import ec.edu.epn.rq_user.uin.loginSignup.LogInScreen
 import ec.edu.epn.rq_user.uin.PerfilScreen
+import ec.edu.epn.rq_user.uin.loginSignup.RecuperarCuentaScreen
+import ec.edu.epn.rq_user.uin.loginSignup.SignUpScreen
 import ec.edu.epn.rq_user.uin.profile.UserEmailScreen
 import ec.edu.epn.rq_user.uin.profile.UserHouseScreen
 import ec.edu.epn.rq_user.uin.profile.UserInfoScreen
@@ -31,11 +34,16 @@ fun AppNavigation(navController: NavHostController, modifier: Modifier = Modifie
   ) { innerPadding ->
     NavHost(
       navController = navController,
-      startDestination = "explora",
+      startDestination = "login",
       modifier = Modifier
         .fillMaxSize()  // ✅ Asegurar que el NavHost use el espacio correctamente
         .padding(innerPadding)  // ✅ Evita que el contenido se superponga con el NavBar
     ) {
+      // Pantallas Módulo LogIn/SignUp
+      composable("login") { LogInScreen(navController, logged) }
+      composable("signup") { SignUpScreen(navController) }
+      composable("recuperar") { RecuperarCuentaScreen(navController) }
+
       // Pantallas de la barra de navegación
       composable("explora") { ExploraScreen(navController) }
       composable("crearuta") { CreaRutaScreen(navController) }
@@ -50,8 +58,6 @@ fun AppNavigation(navController: NavHostController, modifier: Modifier = Modifie
       composable("updateTelefono") { UserPhoneScreen(navController) }
       composable("updateEmail") { UserEmailScreen(navController) }
       composable("updateHouse") { UserHouseScreen(navController) }
-
-
     }
   }
 }
