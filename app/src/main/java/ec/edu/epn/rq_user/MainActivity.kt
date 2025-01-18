@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.navigation.compose.rememberNavController
 import ec.edu.epn.rq_user.navigation.AppNavigation
 import ec.edu.epn.rq_user.ui.theme.Rq_userTheme
@@ -15,7 +17,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             Rq_userTheme {
                 val navController = rememberNavController() // Inicializa el controlador de navegación
-                AppNavigation(navController)
+                val logged = remember { mutableStateOf(false) } // (provisional) Variable global para el estado de autenticación
+
+                AppNavigation(navController, logged=logged)
             }
         }
     }
