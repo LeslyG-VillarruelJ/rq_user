@@ -1,4 +1,4 @@
-package ec.edu.epn.rq_driver.viewmodel
+package ec.edu.epn.rq_user.viewmodel
 
 import androidx.lifecycle.ViewModel
 

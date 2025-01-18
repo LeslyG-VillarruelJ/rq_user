@@ -1,7 +1,6 @@
 package ec.edu.epn.rq_user.navigation
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -37,8 +36,8 @@ fun AppNavigation(
   logged: MutableState<Boolean> = remember { mutableStateOf(false) },
 ) {
   Scaffold(
-    bottomBar = { NavBar(navController) }  // ✅ Se asegura que el NavBar esté presente
     bottomBar = { if (logged.value) NavBar(navController) },  // ✅ Se asegura que el NavBar esté presente
+    modifier = modifier
   ) { innerPadding ->
     NavHost(
       navController = navController,
