@@ -70,6 +70,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import ec.edu.epn.rq_user.viewmodel.AuthViewModel
 import kotlinx.coroutines.launch
 
 @Composable
@@ -287,5 +288,5 @@ fun InfoTooltipButton(modifier: Modifier, tooltip: String) {
 @Composable
 private fun SignUpPreview() {
     val navController = rememberNavController()
-    AppNavigation(navController)
+    AppNavigation(navController, authViewModel = AuthViewModel())
 }
