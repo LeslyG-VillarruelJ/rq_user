@@ -63,8 +63,8 @@ fun LogInScreen(
     errorMessage: String?
 ) {
     var splashScreen by remember { mutableStateOf(true) }
-    val scrollState = rememberScrollState()
     val courutineScope = rememberCoroutineScope()
+    val scrollState = rememberScrollState()
     val keyboardHeight = WindowInsets.ime.getBottom(LocalDensity.current)
 
     LaunchedEffect(keyboardHeight) {

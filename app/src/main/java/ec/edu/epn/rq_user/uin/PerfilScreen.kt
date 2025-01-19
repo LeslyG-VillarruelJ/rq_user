@@ -1,6 +1,5 @@
 package ec.edu.epn.rq_user.uin
 
-
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
@@ -11,14 +10,19 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,12 +43,15 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import ec.edu.epn.rq_user.R
 import ec.edu.epn.rq_user.model.Usuario
+import ec.edu.epn.rq_user.ui.theme.Rojo
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter.ofPattern
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun PerfilScreen(navController: NavController) {
+fun PerfilScreen(navController: NavController, onLogout: () -> Unit) {
+    val scrollState = rememberScrollState()
+
     // Datos mockeados para el usuario
     val formatter = ofPattern("MM/dd/yyyy")
     val mockUser = Usuario(
@@ -61,20 +68,22 @@ fun PerfilScreen(navController: NavController) {
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color(29, 53, 87))
+            .verticalScroll(scrollState)
     ) {
         ProfileInfo(
             name = "${mockUser.nombre} ${mockUser.apellido}",
-            navController = navController
+            navController = navController,
+            onLogout = onLogout
         )
     }
 }
 
 @Composable
-fun ProfileInfo(name: String, navController: NavController) {
+fun ProfileInfo(name: String, navController: NavController, onLogout: () -> Unit = {}) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 80.dp),
+            .padding(top = 60.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         // Imagen de perfil
@@ -98,13 +107,13 @@ fun ProfileInfo(name: String, navController: NavController) {
         )
 
         // Botones
-        Spacer(modifier = Modifier.height(50.dp))
-        ProfileButtons(navController)
+        Spacer(modifier = Modifier.height(30.dp))
+        ProfileButtons(navController, onLogout)
     }
 }
 
 @Composable
-fun ProfileButtons(navController: NavController) {
+fun ProfileButtons(navController: NavController, onLogout: () -> Unit) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -138,12 +147,22 @@ fun ProfileButtons(navController: NavController) {
         }
 
         // Botón de Historial de Viajes
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(10.dp))
         ProfileButton(
             icon = Icons.Default.DateRange,
             text = "Historial de viajes",
             onClick = { navController.navigate("historial_viajes") }
         )
+
+        Button(
+            onClick = onLogout,
+            colors = ButtonDefaults.buttonColors(containerColor = Rojo),
+            modifier = Modifier
+                .fillMaxWidth(.8f)
+                .padding(vertical = 30.dp)
+        ) {
+            Text("Cerrar Sesión", fontWeight = FontWeight.Bold)
+        }
     }
 }
 

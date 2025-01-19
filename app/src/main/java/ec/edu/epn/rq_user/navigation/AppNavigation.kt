@@ -64,9 +64,8 @@ fun AppNavigation(
       composable("explora") { ExploraScreen(navController) }
       composable("crearuta") { CreaRutaScreen(navController) }
       composable("favoritas") { FavoritasScreen(navController) }
-      composable("perfil") { PerfilScreen(navController) }
+      composable("perfil") { PerfilScreen(navController, authViewModel::cerrarSesion) }
 
-      // añadir pantallas adicionales
       // PROFILE SCREENS
       composable("configuracion") { UserSettingsScreen(navController)}
       composable("informacion") { UserInfoScreen(navController) }
