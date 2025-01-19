@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+
+    // Google Services
+    alias(libs.plugins.gms.google.services)
 }
 
 android {
@@ -61,12 +64,6 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
-    // Enhanced UI
-    implementation(libs.androidx.material.icons.extended)
-
-    // navegacion
-    implementation(libs.androidx.navigation.compose)
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -75,7 +72,20 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    // Enhanced UI
+    implementation(libs.androidx.material.icons.extended)
+
+    // navegacion
+    implementation(libs.androidx.navigation.compose)
+
     // APIs
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
+
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth.ktx)
+
+    // Google Play Services
+    implementation(libs.play.services.auth)
 }
