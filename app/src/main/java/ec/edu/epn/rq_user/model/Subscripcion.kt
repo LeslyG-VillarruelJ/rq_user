@@ -6,5 +6,6 @@ data class Subscripcion (
   val usuarioId: String,
   val rutaId: String,
   val fechaSub: Date,
-  val lugarRecogida: String,
+  val latitudRecogida: Number,
+  val longitudRecogida: Number,
 )
