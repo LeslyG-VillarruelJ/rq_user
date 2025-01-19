@@ -16,10 +16,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -49,6 +50,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import ec.edu.epn.rq_user.components.Utils.dropShadow
 import ec.edu.epn.rq_user.viewmodel.AuthViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -70,8 +72,6 @@ fun LogInScreen(
             scrollState.scrollBy(keyboardHeight.toFloat())
         }
     }
-    val submitted = remember { mutableStateOf(false) }
-    val name = remember { mutableStateOf("<Sin nombre>") }
 
     LaunchedEffect(true) {
         delay(750)
@@ -83,31 +83,6 @@ fun LogInScreen(
         verticalArrangement = if (splashScreen) Arrangement.Center else Arrangement.SpaceAround,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        if (!submitted.value) {
-            Image(
-                painterResource(R.drawable.logo_routeq),
-                contentDescription = null,
-                Modifier
-                    .fillMaxWidth(.4f)
-                    .animatePlacement()
-            )
-            AnimatedVisibility(
-                visible = !splashScreen,
-                enter = fadeIn() + expandVertically()
-            ) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    SignInForm(submitted, name)
-                    Spacer(Modifier.height(5.dp))
-                    Text(
-                        text = "¿Olvidaste tu contraseña?",
-                        fontSize = 15.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = Color.White,
-                        modifier = Modifier.clickable { nav.navigate("recuperar") }
-                    )
-                }
-            }
-            AnimatedVisibility(!splashScreen) {
         Image(
             painterResource(R.drawable.logo_routeq),
             contentDescription = null,
@@ -140,6 +115,32 @@ fun LogInScreen(
 
         AnimatedVisibility(!splashScreen) {
             Column (Modifier.fillMaxWidth(13 / 16f)) {
+
+                Button(
+                    onClick = onGoogleLogin,
+                    colors = ButtonDefaults.buttonColors(containerColor = Verde),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(ButtonDefaults.MinHeight)
+                ) {
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        Image(
+                            painter = painterResource(com.google.android.gms.base.R.drawable.googleg_standard_color_18),
+                            contentDescription = "Google Logo",
+                            modifier = Modifier
+                                .fillMaxHeight()
+                                .dropShadow(blur = 12.dp, spread = 2.dp)
+                        )
+                        Text(
+                            text = "Iniciar con Google",
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.align(Alignment.Center)
+                        )
+                    }
+                }
+
+                Spacer(Modifier.height(10.dp))
+
                 OutlinedButton(
                     onClick = { nav.navigate("signup") },
                     modifier = Modifier.fillMaxWidth(),
@@ -148,35 +149,6 @@ fun LogInScreen(
                 ) {
                     Text("Crear cuenta nueva")
                 }
-            }
-        } else {
-            LaunchedEffect(true) {
-                delay(750)
-                logged.value = true
-                nav.navigate("explora")
-            }
-            Column(
-                Modifier.fillMaxSize(.75f),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.Check,
-                    contentDescription = "Login Exitoso",
-                    tint = Verde,
-                    modifier = Modifier
-                        .aspectRatio(1f)
-                        .fillMaxWidth()
-                )
-                Text(
-                    "¡Bienvenido ${name.value}!",
-                    color = Verde,
-                    fontWeight = FontWeight.Black,
-                    fontSize = 35.sp,
-                    textAlign = TextAlign.Center
-                )
-                Spacer(Modifier.height(30.dp))
-                Button(onClick = {submitted.value = false}) { Text("Regresar") }
             }
         }
     }
