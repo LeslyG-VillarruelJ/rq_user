@@ -83,6 +83,9 @@ fun LogInScreen(
         verticalArrangement = if (splashScreen) Arrangement.Center else Arrangement.SpaceAround,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        Spacer(Modifier.height(10.dp))
+
         Image(
             painterResource(R.drawable.logo_routeq),
             contentDescription = null,
