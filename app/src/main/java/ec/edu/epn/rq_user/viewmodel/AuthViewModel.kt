@@ -81,7 +81,7 @@ class AuthViewModel : ViewModel() {
     }
 
     //  Métodoo para inicio de sesión con Firebase mediante Google One Tap
-    fun iniciarSesionConGoogle(googleIdToken: String?) {
+    private fun iniciarSesionConGoogle(googleIdToken: String?) {
         if(googleIdToken !=  null){
             _errorMessage.value = null
             val credential = GoogleAuthProvider.getCredential(googleIdToken, null)
