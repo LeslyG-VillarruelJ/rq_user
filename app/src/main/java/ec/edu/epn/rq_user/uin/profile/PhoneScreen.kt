@@ -58,7 +58,8 @@ fun UserPhoneScreen(navController: NavController) {
     email = "sebas.cruz750@gmail.com",
     telefono = "0978601625",
     cedula = "1719356006",
-    fechaNacimiento = LocalDate.parse("04/11/2000", formatter)
+    fechaNacimiento = LocalDate.parse("04/11/2000", formatter),
+    firesbaseId = "0"
   )
 
   Box(
