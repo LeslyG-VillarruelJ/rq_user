@@ -169,7 +169,7 @@ fun SignInForm(
     ) {
         Text(
             text = if (errorMessage.isNullOrEmpty()) " " else errorMessage,
-            color = if (errorMessage.isNullOrEmpty()) Color.Red else Color.Transparent
+            color = if (errorMessage.isNullOrEmpty()) Color.Transparent else Color.Red
         )
         Input("Correo", value = user, error = !errorMessage.isNullOrEmpty())
         Input("Contraseña", true, value = pass, error = !errorMessage.isNullOrEmpty())
