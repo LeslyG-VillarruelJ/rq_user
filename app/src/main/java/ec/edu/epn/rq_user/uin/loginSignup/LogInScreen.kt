@@ -83,6 +83,9 @@ fun LogInScreen(
         verticalArrangement = if (splashScreen) Arrangement.Center else Arrangement.SpaceAround,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        Spacer(Modifier.height(10.dp))
+
         Image(
             painterResource(R.drawable.logo_routeq),
             contentDescription = null,
@@ -169,7 +172,7 @@ fun SignInForm(
     ) {
         Text(
             text = if (errorMessage.isNullOrEmpty()) " " else errorMessage,
-            color = if (errorMessage.isNullOrEmpty()) Color.Red else Color.Transparent
+            color = if (errorMessage.isNullOrEmpty()) Color.Transparent else Color.Red
         )
         Input("Correo", value = user, error = !errorMessage.isNullOrEmpty())
         Input("Contraseña", true, value = pass, error = !errorMessage.isNullOrEmpty())

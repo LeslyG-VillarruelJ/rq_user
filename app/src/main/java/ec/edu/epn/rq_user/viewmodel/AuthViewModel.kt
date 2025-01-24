@@ -46,7 +46,11 @@ class AuthViewModel : ViewModel() {
     private fun evaluarRespuestaFirebase(res: Task<AuthResult>, origen: String = "") {
         _usuarioAutenticado.value = res.isSuccessful
         if(!res.isSuccessful) {
-            _errorMessage.value = res.exception?.message ?: "Error interno desconocido${origen}"
+            when {
+                res.exception?.message?.contains("The email address is badly formatted") == true -> _errorMessage.value = "!! Ingrese una dirección de correo correcta !!"
+                res.exception?.message?.contains("The supplied auth credential is incorrect") == true -> _errorMessage.value = "Correo o contraseña incorrectos"
+                else -> _errorMessage.value = res.exception?.message ?: "Error interno desconocido${origen}"
+            }
         }
     }
 
@@ -77,7 +81,7 @@ class AuthViewModel : ViewModel() {
     }
 
     //  Métodoo para inicio de sesión con Firebase mediante Google One Tap
-    fun iniciarSesionConGoogle(googleIdToken: String?) {
+    private fun iniciarSesionConGoogle(googleIdToken: String?) {
         if(googleIdToken !=  null){
             _errorMessage.value = null
             val credential = GoogleAuthProvider.getCredential(googleIdToken, null)

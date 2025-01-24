@@ -1,10 +1,6 @@
 package ec.edu.epn.rq_user.uin.profile
 
 import android.os.Build
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -58,7 +54,8 @@ fun UserPhoneScreen(navController: NavController) {
     email = "sebas.cruz750@gmail.com",
     telefono = "0978601625",
     cedula = "1719356006",
-    fechaNacimiento = LocalDate.parse("04/11/2000", formatter)
+    fechaNacimiento = LocalDate.parse("04/11/2000", formatter),
+    firesbaseId = "0"
   )
 
   Box(
