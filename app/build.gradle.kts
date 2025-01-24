@@ -83,6 +83,7 @@ dependencies {
 
     // Enhanced UI
     implementation(libs.androidx.material.icons.extended)
+    implementation(libs.play.services.base)
 
     // navegacion
     implementation(libs.androidx.navigation.compose)
