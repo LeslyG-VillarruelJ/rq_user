@@ -82,12 +82,14 @@ fun Input(
                             if (passwordVisible)
                                 Icon(
                                     imageVector = Icons.Filled.Visibility,
-                                    contentDescription = "Hide password"
+                                    contentDescription = "Hide password",
+                                    tint = Azul
                                 )
                             else
                                 Icon(
                                     imageVector = Icons.Filled.VisibilityOff,
-                                    contentDescription = "Show password"
+                                    contentDescription = "Show password",
+                                    tint = Azul
                                 )
                         }
                     } else {
