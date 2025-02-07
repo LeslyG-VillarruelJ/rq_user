@@ -98,4 +98,18 @@ dependencies {
 
     // Google Play Services
     implementation(libs.play.services.auth)
+
+    // iCONS
+    implementation(libs.androidx.material.icons.extended)
+
+    // Google Play Services (dependencias básicas)
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
+    implementation(libs.maps.compose)
+    implementation(libs.places)
+    implementation(libs.google.maps.services)
+
+    // Material3
+    implementation(libs.material3)
+    implementation(libs.androidx.foundation) // Si usas Foundation Layout
 }

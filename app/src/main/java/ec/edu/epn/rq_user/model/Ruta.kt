@@ -1,11 +1,15 @@
 package ec.edu.epn.rq_user.model
 
 data class Ruta (
-  val latitudInicial: Number,
-  val latitudFinal: Number,
-  val longitudInicial: Number,
-  val longitudFinal: Number,
-  val horaPartida: String,
-  val conductorID: String,
-  val estadoRuta: Boolean,
+  val departureTime: String,
+  val driverId: String,
+  val routeState: Boolean,
+  val startLong: Number,
+  val finalLong: Number,
+  val startLat: Number,
+  val finalLat: Number,
+  val routeName: String,
+  val startPoint: String,
+  val finalPoint: String,
+  val availableSeats: Number
 )
